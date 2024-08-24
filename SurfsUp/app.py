@@ -11,6 +11,7 @@ import datetime as dt
 # Database Setup
 #################################################
 
+####API SQLite Connection & Landing Page
 engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 
 # Reflect an existing database into a new model
@@ -45,6 +46,8 @@ def welcome():
         f"/api/v1.0/&lt;start&gt;/&lt;end&gt;"
     )
 
+
+###API Static Routes
 @app.route("/api/v1.0/precipitation")
 def precipitation():
     most_recent_date = session.query(func.max(Measurement.date)).scalar()
@@ -83,6 +86,7 @@ def tobs():
     
     return jsonify(tobs_data)
 
+###API Dynamic Route
 @app.route("/api/v1.0/<start>")
 def start(start):
     results = session.query(
